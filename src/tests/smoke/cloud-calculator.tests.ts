@@ -1,7 +1,5 @@
 import 'dotenv/config';
-
 import { CalculatorPage } from '../../pageObject/calculator.page';
-
 const chai = require('chai');
 
 const calculatorPage = new CalculatorPage();
@@ -37,5 +35,16 @@ describe('Cloud Calculator', () => {
     await computeEngineElement.click();
 
     await expect(calculatorPage.configurationBlock()).toBeDisplayed();
+  });
+
+  it('Should be able to add two new instances', async () => {
+    $('.QiFlid [aria-label="Increment"] .wX4xVc-Bz112c-RLmnJb').then(addNewInstanceButton => {
+      for (let i = 0; i <= 2; i++) {
+        addNewInstanceButton.click();
+      }
+    });
+
+    const threeInstancesCostUSD = '$417.30';
+    await expect($('.egBpsb .MyvX5d.D0aEmf')).toHaveText(threeInstancesCostUSD);
   });
 });
