@@ -1,4 +1,6 @@
-import { BasePage } from './base.page';
+import { BasePage } from './BasePage';
+
+// TODO: Add more selectors
 
 export class CalculatorPage extends BasePage {
   constructor() {
@@ -6,12 +8,12 @@ export class CalculatorPage extends BasePage {
   }
 
   welcomeElement() {
-    return $('.Gxwdcd');
+    return $$('.Gxwdcd');
   }
 
   async addEstimateButton() {
     const welcomeElement = await this.welcomeElement();
-    return welcomeElement.$('//span[text()="Add to estimate"]');
+    return welcomeElement[0]!.$('//span[text()="Add to estimate"]');
   }
 
   addEstimationModalWindow() {

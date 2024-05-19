@@ -1,5 +1,5 @@
-import 'dotenv/config';
-import { CalculatorPage } from '../../pageObject/calculator.page';
+import "dotenv/config";
+import { CalculatorPage } from "../../pageObject/calculator_page";
 const chai = require('chai');
 
 const calculatorPage = new CalculatorPage();
@@ -15,6 +15,8 @@ describe('Cloud Calculator', () => {
   });
 
   it('Should be able to add new entities into the calculator', async () => {
+    console.log('First test');
+
     // @ts-ignore
     await calculatorPage.open();
 
@@ -37,7 +39,9 @@ describe('Cloud Calculator', () => {
     await expect(calculatorPage.configurationBlock()).toBeDisplayed();
   });
 
-  it('Should be able to add two new instances', async () => {
+  it("Should be able to add two new instances", async () => {
+    console.log(`Second test`);
+
     $('.QiFlid [aria-label="Increment"] .wX4xVc-Bz112c-RLmnJb').then(addNewInstanceButton => {
       for (let i = 0; i <= 2; i++) {
         addNewInstanceButton.click();
