@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 exports.config = {
   autoCompileOpts: {
     autoCompile: true,
@@ -39,6 +41,10 @@ exports.config = {
     timeout: 30000,
   },
 
+  onPrepare() {
+    console.warn(`Start time: ${moment().format('YYYY-MM-DD HH:mm:ss')}`);
+  },
+
   async before() {
     await browser.setWindowSize(1280, 720);
   },
@@ -48,4 +54,8 @@ exports.config = {
       await browser.takeScreenshot();
     }
   },
+
+  onComplete() {
+    console.warn(`Finish time: ${moment().format('YYYY-MM-DD HH:mm:ss')}`);
+  }
 };
