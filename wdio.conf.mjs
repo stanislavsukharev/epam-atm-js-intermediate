@@ -43,7 +43,7 @@ export const config = {
     }]
   ],
 
-  services: [], // или ['chromedriver']
+  services: [],
 
   framework: 'mocha',
 
