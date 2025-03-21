@@ -1,6 +1,6 @@
-const moment = require('moment');
+import dayjs from 'dayjs';
 
-exports.config = {
+export const config = {
   autoCompileOpts: {
     autoCompile: true,
     tsNodeOpts: {
@@ -11,9 +11,10 @@ exports.config = {
 
   runner: 'local',
 
-  specs: ['./src/tests/**/**.tests.ts'],
+  specs: ['./src/tests/**/*.tests.ts'],
+
   suites: {
-    smoke: ['./src/tests/smoke/**.tests.js'],
+    smoke: ['./src/tests/smoke/**/*.tests.ts'],
   },
 
   maxInstances: 1,
@@ -24,7 +25,7 @@ exports.config = {
     },
   ],
 
-  logLevel: 'trace',
+  logLevel: 'info',
 
   bail: 0,
   baseUrl: 'https://cloud.google.com',
@@ -33,16 +34,25 @@ exports.config = {
   connectionRetryTimeout: 90000,
   connectionRetryCount: 3,
 
-  reporters: ['spec', 'allure'],
-  services: ['chromedriver'],
+  reporters: [
+    'spec',
+    ['allure', {
+      outputDir: 'allure-results',
+      disableWebdriverStepsReporting: false,
+      disableWebdriverScreenshotsReporting: false,
+    }]
+  ],
+
+  services: [],
 
   framework: 'mocha',
+
   mochaOpts: {
     timeout: 30000,
   },
 
   onPrepare() {
-    console.warn(`Start time: ${moment().format('YYYY-MM-DD HH:mm:ss')}`);
+    console.warn(`Start time: ${dayjs().format('YYYY-MM-DD HH:mm:ss')}`);
   },
 
   async before() {
@@ -56,6 +66,6 @@ exports.config = {
   },
 
   onComplete() {
-    console.warn(`Finish time: ${moment().format('YYYY-MM-DD HH:mm:ss')}`);
+    console.warn(`Finish time: ${dayjs().format('YYYY-MM-DD HH:mm:ss')}`);
   }
 };
