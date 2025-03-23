@@ -1,58 +1,61 @@
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 
 export const config = {
   autoCompileOpts: {
     autoCompile: true,
     tsNodeOpts: {
       transpileOnly: true,
-      project: 'tsconfig.json',
+      project: "tsconfig.json",
     },
   },
 
-  runner: 'local',
+  runner: "local",
 
-  specs: ['./src/tests/**/*.tests.ts'],
+  specs: ["./src/tests/**/*.tests.ts"],
 
   suites: {
-    smoke: ['./src/tests/smoke/**/*.tests.ts'],
+    smoke: ["./src/tests/smoke/**/*.tests.ts"],
   },
 
   maxInstances: 1,
 
   capabilities: [
     {
-      browserName: 'chrome',
+      browserName: "chrome",
     },
   ],
 
-  logLevel: 'info',
+  logLevel: "warn",
 
   bail: 0,
-  baseUrl: 'https://cloud.google.com',
+  baseUrl: "https://cloud.google.com",
 
   waitforTimeout: 10000,
   connectionRetryTimeout: 90000,
   connectionRetryCount: 3,
 
   reporters: [
-    'spec',
-    ['allure', {
-      outputDir: 'allure-results',
-      disableWebdriverStepsReporting: false,
-      disableWebdriverScreenshotsReporting: false,
-    }]
+    "spec",
+    [
+      "allure",
+      {
+        outputDir: "allure-results",
+        disableWebdriverStepsReporting: false,
+        disableWebdriverScreenshotsReporting: false,
+      },
+    ],
   ],
 
   services: [],
 
-  framework: 'mocha',
+  framework: "mocha",
 
   mochaOpts: {
     timeout: 30000,
   },
 
   onPrepare() {
-    console.warn(`Start time: ${dayjs().format('YYYY-MM-DD HH:mm:ss')}`);
+    console.warn(`Start time: ${dayjs().format("YYYY-MM-DD HH:mm:ss")}`);
   },
 
   async before() {
@@ -66,6 +69,6 @@ export const config = {
   },
 
   onComplete() {
-    console.warn(`Finish time: ${dayjs().format('YYYY-MM-DD HH:mm:ss')}`);
-  }
+    console.warn(`Finish time: ${dayjs().format("YYYY-MM-DD HH:mm:ss")}`);
+  },
 };
