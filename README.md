@@ -4,6 +4,8 @@ This project contains automated UI tests for the Google Cloud Pricing Calculator
 
 ## Project Structure
 
+```
+
 ├── src
 │   ├── pageObjects
 │   │   ├── BasePage.ts
@@ -15,6 +17,7 @@ This project contains automated UI tests for the Google Cloud Pricing Calculator
 ├── package.json
 ├── tsconfig.json
 └── README.md
+```
 
 The project structure includes:
 
