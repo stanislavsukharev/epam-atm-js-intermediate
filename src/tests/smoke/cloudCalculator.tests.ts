@@ -1,4 +1,3 @@
-import { expect as chaiExpect } from "chai";
 import { CalculatorPage } from "../../pageObjects/CalculatorPage";
 
 const calculatorPage = new CalculatorPage();
@@ -13,10 +12,10 @@ describe("Cloud Calculator", () => {
     await calculatorPage.open();
 
     const url = await browser.getUrl();
-    chaiExpect(url).to.equal(`${browser.options.baseUrl}/products/calculator`);
+    expect(url).toBe(`${browser.options.baseUrl}/products/calculator`);
 
     await calculatorPage.addEstimate();
-    chaiExpect(await calculatorPage.addEstimationModalWindow.isDisplayed()).to.be.true;
+    await expect(calculatorPage.addEstimationModalWindow).toBeDisplayed();
 
     await calculatorPage.openComputeEngine();
     await calculatorPage.configurationBlock.waitForDisplayed();

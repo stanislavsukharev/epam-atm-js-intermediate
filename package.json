@@ -12,7 +12,6 @@
     "node": ">=20"
   },
   "devDependencies": {
-    "@types/chai": "^5.2.0",
     "@wdio/allure-reporter": "9.11.0",
     "@wdio/cli": "9.11.0",
     "@wdio/globals": "^9.12.1",
@@ -22,7 +21,6 @@
     "@wdio/spec-reporter": "9.11.0",
     "@wdio/types": "^9.10.1",
     "allure-commandline": "2.13.8",
-    "chai": "^5.2.0",
     "dayjs": "^1.11.13",
     "dotenv": "^16.4.7",
     "expect-webdriverio": "^3.0.1",
