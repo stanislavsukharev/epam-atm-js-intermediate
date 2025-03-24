@@ -70,6 +70,5 @@ Reports will be generated in the allure-results directory
 - WebdriverIO v9+
 - TypeScript
 - Mocha (test runner)
-- Chai (assertion library)
 - Allure (reporting tool)
 
