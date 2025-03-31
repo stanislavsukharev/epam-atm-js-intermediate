@@ -11,7 +11,6 @@ It follows the Page Object Model (POM) design pattern to ensure modularity and m
 │   │      └── CalculatorPage.ts
 │   └── tests
 │          └── cloudCalculator.spec.ts
-├── test-results
 ├── playwright.config.ts
 ├── tsconfig.json
 ├── package.json
