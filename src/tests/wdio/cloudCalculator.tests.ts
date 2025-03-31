@@ -1,4 +1,4 @@
-import { CalculatorPage } from "../../pageObjects/CalculatorPage";
+import { CalculatorPage } from "../../pageObjects/wdio/CalculatorPage";
 
 const calculatorPage = new CalculatorPage();
 

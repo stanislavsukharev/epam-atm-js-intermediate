@@ -1,41 +1,39 @@
-# Google Cloud Calculator - WebdriverIO Test Automation Framework
+# Google Cloud Pricing Calculator – Dual Test Automation Framework (Playwright + WebdriverIO)
 
-This project contains automated UI tests for the Google Cloud Pricing Calculator, developed using **WebdriverIO**, **TypeScript**, and the **Mocha** framework. The framework follows the **Page Object Model (POM)** pattern, which allows clear separation of test logic and page interactions.
+This project provides automated UI tests for the Google Cloud Pricing Calculator, implemented using both Playwright and WebdriverIO to support a smooth migration strategy and side-by-side validation.
 
 ## Project Structure
 
 ```
-
 ├── src
 │   ├── pageObjects
-│   │   ├── BasePage.ts
-│   │   └── CalculatorPage.ts
+│   │   ├── playwright
+│   │   │   ├── BasePage.ts
+│   │   │   └── CalculatorPage.ts
+│   │   └── wdio
+│   │       ├── BasePage.ts
+│   │       └── CalculatorPage.ts
 │   └── tests
-│       └── smoke
+│       ├── playwright
+│       │   └── cloudCalculator.spec.ts
+│       └── wdio
 │           └── cloudCalculator.tests.ts
+├── playwright.config.ts
 ├── wdio.conf.mjs
 ├── package.json
 ├── tsconfig.json
-└── README.md
+├── README.md
 ```
 
-The project structure includes:
-
-- **BasePage.ts**  
-  Base page class containing common methods for page interactions, such as navigating to URLs.
-
-- **CalculatorPage.ts**  
-  Page object for the Google Cloud Calculator page. Contains selectors and methods for interactions such as:
-  - Accepting cookies
-  - Adding estimates
-  - Selecting Compute Engine
-  - Incrementing instances
-  - Retrieving total cost
-
-- **cloudCalculator.tests.ts**  
-  Test cases covering core functionality:
-  - Adding a new estimate and verifying visibility
-  - Incrementing instance count and verifying the total cost calculation
+## Technologies Used
+| **Tool**          | **Purpose**                     |
+|-------------------|----------------------------------|
+| Playwright        | Modern browser automation        |
+| WebdriverIO       | Legacy UI automation             |
+| TypeScript        | Type-safe codebase               |
+| Mocha             | WDIO test runner                 |
+| Playwright Test   | Built-in Playwright runner       |
+| Allure            | Reporting (WDIO only)            |
 
 ## Setup and Installation
 
@@ -52,23 +50,33 @@ The project structure includes:
 `npm install`
 
 ## Running Tests
+Playwright (Chromium only)
+`npm run test:playwright`
+Runs tests from src/tests/playwright using Playwright Test Runner
 
-`npm run test`
+WebdriverIO (Mocha)
+`npm run test:wdio`
+Runs legacy tests from src/tests/wdio using Mocha + WDIO
 
-Tests will run in Chrome browser by default
+## Migration Checklist
 
-## Generating Reports
+| **Step**                                             | **Status**         |
+|------------------------------------------------------|--------------------|
+| Playwright installation & setup                      |    Done            |
+| Initial working config                               |    Done            |
+| Page Objects refactored                              |    Done            |
+| Tests rewritten using Playwright best practices      |    Done            |
+| Parallel testing (Playwright + WDIO)                 |    Done            |
+| Clear console output using spec/dot reporters        |    Done            |
+| API mocking or tracing (optional)                    |    Not needed yet  |
+| Docs updated (README.md)                             |    Done            |
 
-- To generate a detailed Allure report:
-
+## WDIO Reporting
+To generate Allure reports:
 `npm run report:generate`
+Results stored in /allure-results
 
-Reports will be generated in the allure-results directory
-
-## Technologies & Libraries Used
-
-- WebdriverIO v9+
-- TypeScript
-- Mocha (test runner)
-- Allure (reporting tool)
-
+## Notes
+No deprecated files are kept in the repo
+Playwright is used only with its built-in runner, no Mocha
+Each framework has its own set of page objects and tests
