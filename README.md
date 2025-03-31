@@ -7,12 +7,10 @@ It follows the Page Object Model (POM) design pattern to ensure modularity and m
 ```
 ├── src
 │   ├── pageObjects
-│   │   └── playwright
-│   │       ├── BasePage.ts
-│   │       └── CalculatorPage.ts
+│   │      ├── BasePage.ts
+│   │      └── CalculatorPage.ts
 │   └── tests
-│       └── playwright
-│           └── cloudCalculator.spec.ts
+│          └── cloudCalculator.spec.ts
 ├── test-results
 ├── playwright.config.ts
 ├── tsconfig.json
