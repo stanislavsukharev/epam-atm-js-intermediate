@@ -34,10 +34,12 @@ It follows the Page Object Model (POM) design pattern to ensure modularity and m
 
 ## Running Tests
 
-# Run tests in Chromium only
+Run tests in Chromium only:
+
 `npm run test:playwright`
 
-# Run tests in all browsers
+Run tests in all browsers:
+
 `npm run test:playwright:all`
 
 ## Technologies Used
