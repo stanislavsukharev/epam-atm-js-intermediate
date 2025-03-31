@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { CalculatorPage } from '../../pageObjects/playwright/CalculatorPage';
+import { CalculatorPage } from '../pageObjects/CalculatorPage';
 
 test.describe('Cloud Calculator', () => {
   let calculatorPage: CalculatorPage;
