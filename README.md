@@ -10,7 +10,7 @@ It follows the Page Object Model (POM) design pattern to ensure modularity and m
 │   │      ├── base.page.ts
 │   │      └── calculator.page.ts
 |   |
-|   ├──test-data
+|   ├── test-data
 |   |      └── calculator.data.ts 
 |   |
 │   └── tests
@@ -29,13 +29,16 @@ This project follows the **Page Object Model** (POM) and organizes files clearly
 |--------------------------|----------------------------------------|
 | `src/pages/`             | Contains all Playwright page objects   |
 | `src/tests/`             | Contains Playwright test specs         |
+| `src/test-data/`         | Contains Playwright test data          |
 | `base.page.ts`           | Base class for page objects            |
 | `calculator.page.ts`     | Page object for the Google calculator  |
 | `calculator.spec.ts`     | End-to-end tests for calculator        |
+| `calculator.data.ts`     | Test data used in calculator scenarios |
 
 Naming follows the pattern:  
-🔹 `*.page.ts` — Page Object  
-🔹 `*.spec.ts` — Test Spec  
+`*.page.ts` — Page Object  
+`*.spec.ts` — Test Spec  
+`*.data.ts` - Test Data
 
 ## Setup and Installation
 
