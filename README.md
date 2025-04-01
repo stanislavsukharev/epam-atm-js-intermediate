@@ -38,7 +38,7 @@ This project follows the **Page Object Model** (POM) and organizes files clearly
 Naming follows the pattern:  
 `*.page.ts` — Page Object  
 `*.spec.ts` — Test Spec  
-`*.data.ts` - Test Data
+`*.data.ts` — Test Data
 
 ## Setup and Installation
 
