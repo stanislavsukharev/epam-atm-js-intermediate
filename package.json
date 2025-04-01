@@ -4,7 +4,7 @@
   "description": "Automated Testing Mentoring with JS: Intermediate",
   "private": true,
  "scripts": {
-  "test:playwright": "npx playwright test --project=chromium",
+  "test:playwright:chromium": "npx playwright test --project=chromium",
   "test:playwright:all": "npx playwright test"
   },
 

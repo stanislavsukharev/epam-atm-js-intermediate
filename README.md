@@ -16,6 +16,21 @@ It follows the Page Object Model (POM) design pattern to ensure modularity and m
 ├── package.json
 └── README.md
 ```
+## 📁 Project Structure & Naming Conventions
+
+This project follows the **Page Object Model** (POM) and organizes files clearly:
+
+| Folder/File               | Purpose                               |
+|--------------------------|----------------------------------------|
+| `src/pages/`             | Contains all Playwright page objects   |
+| `src/tests/`             | Contains Playwright test specs         |
+| `base.page.ts`           | Base class for page objects            |
+| `calculator.page.ts`     | Page object for the Google calculator  |
+| `calculator.spec.ts`     | End-to-end tests for calculator        |
+
+Naming follows the pattern:  
+🔹 `*.page.ts` — Page Object  
+🔹 `*.spec.ts` — Test Spec  
 
 ## Setup and Installation
 
@@ -35,7 +50,7 @@ It follows the Page Object Model (POM) design pattern to ensure modularity and m
 
 Run tests in Chromium only:
 
-`npm run test:playwright`
+`npm run test:playwright:chromium`
 
 Run tests in all browsers:
 
