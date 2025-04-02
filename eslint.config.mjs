@@ -27,7 +27,7 @@ export default defineConfig([
     rules: {
       ...js.configs.recommended.rules,
       'prettier/prettier': 'warn',
-      console: 'off',
+      "no-console": 'off',
       eqeqeq: ['error', 'always'],
       curly: ['warn', 'all'],
     },
