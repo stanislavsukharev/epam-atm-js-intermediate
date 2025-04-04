@@ -1,3 +1,3 @@
 export const calculatorTestData = {
-    expectedTotalCost: '$419.10',
-  };
+  expectedTotalCost: '$419.10',
+}

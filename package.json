@@ -3,21 +3,32 @@
   "version": "1.0.0",
   "description": "Automated Testing Mentoring with JS: Intermediate",
   "private": true,
- "scripts": {
-  "test:playwright:chromium": "npx playwright test --project=chromium",
-  "test:playwright:all": "npx playwright test"
+  "scripts": {
+    "test:playwright:chromium": "npx playwright test --project=chromium",
+    "test:playwright:all": "npx playwright test",
+    "lint": "eslint . --ext .js,.ts,.jsx,.tsx",
+    "lint:fix": "eslint . --ext .js,.ts,.jsx,.tsx --fix"
+    
   },
-
   "license": "EPAM Systems",
   "engines": {
     "node": ">=20"
   },
   "devDependencies": {
+    "@eslint/js": "^9.23.0",
     "@playwright/test": "^1.51.1",
+    "@reportportal/agent-js-playwright": "^5.1.11",
     "@types/node": "^22.13.14",
     "dayjs": "^1.11.13",
     "dotenv": "^16.4.7",
+    "eslint": "^9.23.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-playwright": "^2.2.0",
+    "eslint-plugin-prettier": "^5.2.5",
+    "globals": "^16.0.0",
+    "prettier": "^3.5.3",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.29.0"
   }
 }
