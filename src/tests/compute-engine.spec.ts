@@ -1,14 +1,15 @@
 import { test, expect } from '@playwright/test'
-import { CalculatorPage } from '../pages/calculator.page'
+import { CalculatorPage } from '../pages/compute-engine.page'
 import { calculatorTestData } from '../test-data/calculator.data'
 
-test.describe('Cloud Calculator', () => {
-  let calculatorPage: CalculatorPage
+let calculatorPage: CalculatorPage
 
+test.describe('Cloud Calculator', () => {
   test.beforeEach(async ({ page }) => {
     calculatorPage = new CalculatorPage(page)
     await calculatorPage.open()
     await calculatorPage.acceptCookies()
+    await expect(calculatorPage.addEstimateButton).toBeVisible()
   })
 
   test("should display 'Add to estimate' button on load", async () => {
@@ -28,18 +29,15 @@ test.describe('Cloud Calculator', () => {
     await expect(calculatorPage.getCardByName('Dataflow')).toBeVisible()
   })
 
-  test('should add a new estimate to calculator', async ({ page }) => {
-    expect(page.url()).toContain('/products/calculator')
-
+  test('should add a new estimate to calculator', async () => {
     await calculatorPage.addEstimate()
     await expect(calculatorPage.addEstimationModalWindow).toBeVisible()
-
     await calculatorPage.openComputeEngine()
     await expect(calculatorPage.configurationBlock).toBeVisible()
   })
 
   test('should add two new instances and check the total cost', async () => {
-    const expectedCost = calculatorTestData.expectedTotalCost
+    const expectedCost = calculatorTestData.computeEngine.expectedTotalCost
 
     await calculatorPage.addEstimate()
     await calculatorPage.openComputeEngine()

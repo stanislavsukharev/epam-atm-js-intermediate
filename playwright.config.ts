@@ -14,7 +14,7 @@ export default defineConfig({
   reporter: [
     ['html', { outputFolder: 'playwright-report', open: 'never' }],
     ['junit', { outputFile: 'results/junit-results.xml' }],
-    [
+    /* [
       '@reportportal/agent-js-playwright',
       {
         endpoint: 'https://reportportal.epam.com/api/v1',
@@ -26,7 +26,7 @@ export default defineConfig({
         attributes: [{ key: 'env', value: 'qa' }],
         debug: false,
       },
-    ],
+    ], */
   ],
 
   use: {
