@@ -5,18 +5,21 @@ It follows the Page Object Model (POM) design pattern to ensure modularity and m
 ## Project Structure
 
 ```
-  src
-   ├── pages
-   │   ├── base.page.ts
-   │   ├── cloud-sql.page.ts
-   │   ├── cloud-storage.page.ts
-   │   └── compute-engine.page.ts
-   ├── test-data
-   │   └── calculator.data.ts
-   └── tests
-       ├── cloud-sql.spec.ts
-       ├── cloud-storage.spec.ts
-       └── compute-engine.spec.ts
+  src  
+├── fixtures  
+│   └── fixtures.ts  
+├── pages  
+│   ├── base.page.ts  
+│   ├── cloud-sql.page.ts  
+│   ├── cloud-storage.page.ts  
+│   └── compute-engine.page.ts  
+├── test-data  
+│   └── calculator.data.ts  
+├── tests  
+│   ├── cloud-sql.spec.ts  
+│   ├── cloud-storage.spec.ts  
+│   └── compute-engine.spec.ts  
+
 ```
 ## 📁 Project Structure & Naming Conventions
 
@@ -27,6 +30,7 @@ This project follows the **Page Object Model** (POM) and organizes files clearly
 | `src/pages/`             | Contains all Playwright page objects         |
 | `src/tests/`             | Contains Playwright test specs               |
 | `src/test-data/`         | Contains Playwright test data                |
+| `src/fixtures/`          | Custom Playwright fixtures                   |
 | `base.page.ts`           | Base class for shared page object logic      |
 | `cloud-sql.page.ts`      | Page object for Cloud SQL calculator section |
 | `cloud-storage.page.ts`  | Page object for Cloud Storage section        |
@@ -35,6 +39,8 @@ This project follows the **Page Object Model** (POM) and organizes files clearly
 | `cloud-storage.spec.ts`  | End-to-end tests for Cloud Storage           |
 | `compute-engine.spec.ts` | End-to-end tests for Compute Engine          |
 | `calculator.data.ts`     | Test data used in calculator scenarios       |
+| `fixtures.ts`            | Defines reusable fixtures for tests          |
+
 
 
 Naming follows the pattern:  

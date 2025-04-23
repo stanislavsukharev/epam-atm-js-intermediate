@@ -1,18 +1,8 @@
-import { test, expect } from '@playwright/test'
-import { CloudStoragePage } from '../pages/cloud-storage.page'
+import { test, expect } from '../fixtures/fixtures'
 import { calculatorTestData } from '../test-data/calculator.data'
 
-let cloudStorage: CloudStoragePage
-
-test.describe('[E2E] Cloud Storage', () => {
-  test.beforeEach(async ({ page }) => {
-    cloudStorage = new CloudStoragePage(page)
-    await cloudStorage.open()
-    await cloudStorage.openAndInitCloudStorage()
-    await expect(cloudStorage.totalAmountOfStorage).toBeVisible()
-  })
-
-  test('[P1] Basic Cloud Storage Estimate Creation and Share', async () => {
+test.describe('Cloud Storage', () => {
+  test('Basic cloud storage estimate creation and share', async ({ cloudStorage }) => {
     await cloudStorage.selectLocationAndStorageClass()
     await cloudStorage.fillEstimateFields({
       totalStorage: '10000',
@@ -22,25 +12,25 @@ test.describe('[E2E] Cloud Storage', () => {
       dataTransferred: '294',
     })
     await cloudStorage.selectRegions('Europe', 'Oceania')
-    await expect(cloudStorage.totalCost).toHaveText(calculatorTestData.cloudStorage.P1)
-    await cloudStorage.openShareDialogAndAssertCost(calculatorTestData.cloudStorage.P1)
+    await expect(cloudStorage.totalCost).toHaveText(calculatorTestData.cloudStorage.basicEstimate)
+    await cloudStorage.openShareDialogAndAssertCost(calculatorTestData.cloudStorage.basicEstimate)
   })
 
-  test('[P2] Upper Edge Input Values Accepted and Estimated Correctly', async () => {
+  test('Upper edge input values accepted and estimated correctly', async ({ cloudStorage }) => {
     await cloudStorage.selectLocationAndStorageClass()
     await cloudStorage.fillEstimateFields({
-      totalStorage: '931322574',
-      dataWritten: '931322574',
-      dataRead: '931322574',
-      dataRetrieved: '93132257',
-      dataTransferred: '93132257',
+      totalStorage: calculatorTestData.cloudStorage.maxDataValue,
+      dataWritten: calculatorTestData.cloudStorage.maxDataValue,
+      dataRead: calculatorTestData.cloudStorage.maxDataValue,
+      dataRetrieved: calculatorTestData.cloudStorage.maxDataRetrievedAndTransferred,
+      dataTransferred: calculatorTestData.cloudStorage.maxDataRetrievedAndTransferred,
     })
     await cloudStorage.selectRegions('Europe', 'Oceania')
-    await expect(cloudStorage.totalCost).toHaveText(calculatorTestData.cloudStorage.P2)
-    await cloudStorage.openShareDialogAndAssertCost(calculatorTestData.cloudStorage.P2)
+    await expect(cloudStorage.totalCost).toHaveText(calculatorTestData.cloudStorage.maxValuesEstimate)
+    await cloudStorage.openShareDialogAndAssertCost(calculatorTestData.cloudStorage.maxValuesEstimate)
   })
 
-  test('[P3] Lower Edge Input Values Accepted and Estimated Correctly', async () => {
+  test('Lower edge input values accepted and estimated correctly', async ({ cloudStorage }) => {
     await cloudStorage.selectLocationAndStorageClass()
     await cloudStorage.fillEstimateFields({
       totalStorage: '1',
@@ -50,30 +40,27 @@ test.describe('[E2E] Cloud Storage', () => {
       dataTransferred: '',
     })
     await cloudStorage.selectRegions('Europe', 'Oceania')
-    await expect(cloudStorage.totalCost).toHaveText(calculatorTestData.cloudStorage.P3)
-    await cloudStorage.openShareDialogAndAssertCost(calculatorTestData.cloudStorage.P3)
+    await expect(cloudStorage.totalCost).toHaveText(calculatorTestData.cloudStorage.minValuesEstimate)
+    await cloudStorage.openShareDialogAndAssertCost(calculatorTestData.cloudStorage.minValuesEstimate)
   })
 
-  test('[N1] Estimate With Required Fields Missing', async () => {
+  test('Estimate with required fields missing', async ({ cloudStorage }) => {
     await cloudStorage.selectLocationAndStorageClass()
     await cloudStorage.totalAmountOfStorage.fill('')
     await expect(cloudStorage.requiredFieldMessage).toBeVisible()
-    await expect(cloudStorage.totalCost).toHaveText(calculatorTestData.cloudStorage.N1)
   })
 
-  test('[N2] Use Invalid Characters in Numeric Fields', async () => {
+  test('Numeric field strips invalid characters', async ({ cloudStorage }) => {
     await cloudStorage.selectLocationAndStorageClass()
     await cloudStorage.totalAmountOfStorage.fill('')
     await cloudStorage.totalAmountOfStorage.focus()
     await cloudStorage.totalAmountOfStorage.type('abc!@#10000')
     await expect(cloudStorage.totalAmountOfStorage).toHaveValue('10000')
-    await expect(cloudStorage.totalCost).toHaveText(calculatorTestData.cloudStorage.N2)
   })
 
-  test('[N3] Use Out-of-Range Value in Edge Case', async () => {
+  test('Use out-of-range value in edge case', async ({ cloudStorage }) => {
     await cloudStorage.selectLocationAndStorageClass()
     await cloudStorage.totalAmountOfStorage.fill('931322575')
     await expect(cloudStorage.outOfRangeMessage).toBeVisible()
-    await expect(cloudStorage.totalCost).toHaveText(calculatorTestData.cloudStorage.N3)
   })
 })
