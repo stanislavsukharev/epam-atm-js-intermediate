@@ -4,24 +4,24 @@ import { CloudStoragePage } from '../pages/cloud-storage.page'
 import { CalculatorPage } from '../pages/compute-engine.page'
 
 type MyFixtures = {
-  cloudSql: CloudSqlPage
-  cloudStorage: CloudStoragePage
+  cloudSqlPage: CloudSqlPage
+  cloudStoragePage: CloudStoragePage
   calculatorPage: CalculatorPage
 }
 
 export const test = base.extend<MyFixtures>({
-  cloudSql: async ({ page }, use) => {
-    const cloudSql = new CloudSqlPage(page)
-    await cloudSql.open()
-    await cloudSql.openAndInitCloudSql()
-    await use(cloudSql)
+  cloudSqlPage: async ({ page }, use) => {
+    const cloudSqlPage = new CloudSqlPage(page)
+    await cloudSqlPage.open()
+    await cloudSqlPage.openAndInitCloudSql()
+    await use(cloudSqlPage)
   },
 
-  cloudStorage: async ({ page }, use) => {
-    const cloudStorage = new CloudStoragePage(page)
-    await cloudStorage.open()
-    await cloudStorage.openAndInitCloudStorage()
-    await use(cloudStorage)
+  cloudStoragePage: async ({ page }, use) => {
+    const cloudStoragePage = new CloudStoragePage(page)
+    await cloudStoragePage.open()
+    await cloudStoragePage.openAndInitCloudStorage()
+    await use(cloudStoragePage)
   },
 
   calculatorPage: async ({ page }, use) => {
