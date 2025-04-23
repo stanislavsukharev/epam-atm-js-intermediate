@@ -26,8 +26,12 @@ test.describe('Cloud Storage', () => {
       dataTransferred: calculatorTestData.cloudStorage.maxDataRetrievedAndTransferred,
     })
     await cloudStorage.selectRegions('Europe', 'Oceania')
-    await expect(cloudStorage.totalCost).toHaveText(calculatorTestData.cloudStorage.maxValuesEstimate)
-    await cloudStorage.openShareDialogAndAssertCost(calculatorTestData.cloudStorage.maxValuesEstimate)
+    await expect(cloudStorage.totalCost).toHaveText(
+      calculatorTestData.cloudStorage.maxValuesEstimate,
+    )
+    await cloudStorage.openShareDialogAndAssertCost(
+      calculatorTestData.cloudStorage.maxValuesEstimate,
+    )
   })
 
   test('Lower edge input values accepted and estimated correctly', async ({ cloudStorage }) => {
@@ -40,8 +44,12 @@ test.describe('Cloud Storage', () => {
       dataTransferred: '',
     })
     await cloudStorage.selectRegions('Europe', 'Oceania')
-    await expect(cloudStorage.totalCost).toHaveText(calculatorTestData.cloudStorage.minValuesEstimate)
-    await cloudStorage.openShareDialogAndAssertCost(calculatorTestData.cloudStorage.minValuesEstimate)
+    await expect(cloudStorage.totalCost).toHaveText(
+      calculatorTestData.cloudStorage.minValuesEstimate,
+    )
+    await cloudStorage.openShareDialogAndAssertCost(
+      calculatorTestData.cloudStorage.minValuesEstimate,
+    )
   })
 
   test('Estimate with required fields missing', async ({ cloudStorage }) => {
