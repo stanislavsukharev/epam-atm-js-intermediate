@@ -1,26 +1,17 @@
-import { test, expect } from '@playwright/test'
-import { CalculatorPage } from '../pages/calculator.page'
+import { test, expect } from '../fixtures/fixtures'
 import { calculatorTestData } from '../test-data/calculator.data'
 
 test.describe('Cloud Calculator', () => {
-  let calculatorPage: CalculatorPage
-
-  test.beforeEach(async ({ page }) => {
-    calculatorPage = new CalculatorPage(page)
-    await calculatorPage.open()
-    await calculatorPage.acceptCookies()
-  })
-
-  test("should display 'Add to estimate' button on load", async () => {
+  test('Should display "Add to estimate" button on load', async ({ calculatorPage }) => {
     await expect(calculatorPage.addEstimateButton).toBeVisible()
   })
 
-  test('should switch currency to Euro and display it', async () => {
+  test('Should switch currency to Euro and display it', async ({ calculatorPage }) => {
     await calculatorPage.selectCurrency('EUR')
     await expect(calculatorPage.selectedCurrency).toHaveText('EUR')
   })
 
-  test('should display correct result when searching for "Dataflow"', async () => {
+  test('Should display correct result when searching for "Dataflow"', async ({ calculatorPage }) => {
     await calculatorPage.addEstimate()
     await expect(calculatorPage.addEstimationModalWindow).toBeVisible()
 
@@ -28,18 +19,15 @@ test.describe('Cloud Calculator', () => {
     await expect(calculatorPage.getCardByName('Dataflow')).toBeVisible()
   })
 
-  test('should add a new estimate to calculator', async ({ page }) => {
-    expect(page.url()).toContain('/products/calculator')
-
+  test('Should add a new estimate to calculator', async ({ calculatorPage }) => {
     await calculatorPage.addEstimate()
     await expect(calculatorPage.addEstimationModalWindow).toBeVisible()
-
     await calculatorPage.openComputeEngine()
     await expect(calculatorPage.configurationBlock).toBeVisible()
   })
 
-  test('should add two new instances and check the total cost', async () => {
-    const expectedCost = calculatorTestData.expectedTotalCost
+  test('Should add two new instances and check the total cost', async ({ calculatorPage }) => {
+    const expectedCost = calculatorTestData.computeEngine.basicEstimate
 
     await calculatorPage.addEstimate()
     await calculatorPage.openComputeEngine()

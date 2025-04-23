@@ -5,35 +5,43 @@ It follows the Page Object Model (POM) design pattern to ensure modularity and m
 ## Project Structure
 
 ```
-├── src
-│   ├── pages
-│   │      ├── base.page.ts
-│   │      └── calculator.page.ts
-|   |
-|   ├── test-data
-|   |      └── calculator.data.ts 
-|   |
-│   └── tests
-│          └── calculator.spec.ts
-|
-├── playwright.config.ts
-├── tsconfig.json
-├── package.json
-└── README.md
+  src  
+├── fixtures  
+│   └── fixtures.ts  
+├── pages  
+│   ├── base.page.ts  
+│   ├── cloud-sql.page.ts  
+│   ├── cloud-storage.page.ts  
+│   └── compute-engine.page.ts  
+├── test-data  
+│   └── calculator.data.ts  
+├── tests  
+│   ├── cloud-sql.spec.ts  
+│   ├── cloud-storage.spec.ts  
+│   └── compute-engine.spec.ts  
+
 ```
 ## 📁 Project Structure & Naming Conventions
 
 This project follows the **Page Object Model** (POM) and organizes files clearly:
 
-| Folder/File               | Purpose                               |
-|--------------------------|----------------------------------------|
-| `src/pages/`             | Contains all Playwright page objects   |
-| `src/tests/`             | Contains Playwright test specs         |
-| `src/test-data/`         | Contains Playwright test data          |
-| `base.page.ts`           | Base class for page objects            |
-| `calculator.page.ts`     | Page object for the Google calculator  |
-| `calculator.spec.ts`     | End-to-end tests for calculator        |
-| `calculator.data.ts`     | Test data used in calculator scenarios |
+| Folder/File               | Purpose                                      |
+|--------------------------|----------------------------------------------|
+| `src/pages/`             | Contains all Playwright page objects         |
+| `src/tests/`             | Contains Playwright test specs               |
+| `src/test-data/`         | Contains Playwright test data                |
+| `src/fixtures/`          | Custom Playwright fixtures                   |
+| `base.page.ts`           | Base class for shared page object logic      |
+| `cloud-sql.page.ts`      | Page object for Cloud SQL calculator section |
+| `cloud-storage.page.ts`  | Page object for Cloud Storage section        |
+| `compute-engine.page.ts` | Page object for Compute Engine section       |
+| `cloud-sql.spec.ts`      | End-to-end tests for Cloud SQL calculator    |
+| `cloud-storage.spec.ts`  | End-to-end tests for Cloud Storage           |
+| `compute-engine.spec.ts` | End-to-end tests for Compute Engine          |
+| `calculator.data.ts`     | Test data used in calculator scenarios       |
+| `fixtures.ts`            | Defines reusable fixtures for tests          |
+
+
 
 Naming follows the pattern:  
 `*.page.ts` — Page Object  
