@@ -18,35 +18,39 @@ It follows the Page Object Model (POM) design pattern to ensure modularity and m
 ├── tests  
 │   ├── cloud-sql.spec.ts  
 │   ├── cloud-storage.spec.ts  
-│   └── compute-engine.spec.ts  
-
+│   ├── compute-engine.spec.ts  
+|   └── export-estimate-as-csv.spec.ts 
+├── utils
+|   └── csv-utils.ts
 ```
 ## 📁 Project Structure & Naming Conventions
 
 This project follows the **Page Object Model** (POM) and organizes files clearly:
 
-| Folder/File               | Purpose                                      |
-|--------------------------|----------------------------------------------|
-| `src/pages/`             | Contains all Playwright page objects         |
-| `src/tests/`             | Contains Playwright test specs               |
-| `src/test-data/`         | Contains Playwright test data                |
-| `src/fixtures/`          | Custom Playwright fixtures                   |
-| `base.page.ts`           | Base class for shared page object logic      |
-| `cloud-sql.page.ts`      | Page object for Cloud SQL calculator section |
-| `cloud-storage.page.ts`  | Page object for Cloud Storage section        |
-| `compute-engine.page.ts` | Page object for Compute Engine section       |
-| `cloud-sql.spec.ts`      | End-to-end tests for Cloud SQL calculator    |
-| `cloud-storage.spec.ts`  | End-to-end tests for Cloud Storage           |
-| `compute-engine.spec.ts` | End-to-end tests for Compute Engine          |
-| `calculator.data.ts`     | Test data used in calculator scenarios       |
-| `fixtures.ts`            | Defines reusable fixtures for tests          |
-
-
+| Folder/File                     | Purpose                                      |
+|--------------------------------|----------------------------------------------|
+| `src/pages/`                   | Contains all Playwright page objects         |
+| `src/tests/`                   | Contains Playwright test specs               |
+| `src/test-data/`               | Contains Playwright test data                |
+| `src/fixtures/`                | Custom Playwright fixtures                   |
+| `src/utils/`                   | Utility modules (e.g. CSV parsing)           |
+| `base.page.ts`                 | Base class for shared page object logic      |
+| `cloud-sql.page.ts`            | Page object for Cloud SQL calculator section |
+| `cloud-storage.page.ts`        | Page object for Cloud Storage section        |
+| `compute-engine.page.ts`       | Page object for Compute Engine section       |
+| `cloud-sql.spec.ts`            | End-to-end tests for Cloud SQL calculator    |
+| `cloud-storage.spec.ts`        | End-to-end tests for Cloud Storage           |
+| `compute-engine.spec.ts`       | End-to-end tests for Compute Engine          |
+| `export-estimate-as-csv.spec.ts`| Verifies download and validation of estimates as CSV |
+| `csv-utils.ts`                 | Validates downloaded CSV files               |
+| `calculator.data.ts`           | Test data used in calculator scenarios       |
+| `fixtures.ts`                  | Defines reusable fixtures for tests          |
 
 Naming follows the pattern:  
 `*.page.ts` — Page Object  
 `*.spec.ts` — Test Spec  
-`*.data.ts` — Test Data
+`*.data.ts` — Test Data  
+`*.utils.ts` — Utility Module
 
 ## Setup and Installation
 
@@ -127,4 +131,8 @@ The following files and folders are excluded from version control:
 | POM Pattern      | Maintainable test structure      |
 | ESLint           | Code linting and style enforcement |
 | Prettier         | Code formatting                  |
+| csv-parse	       | CSV parsing and transformation   |
 
+## Notes
+The CSV download logic is tested via export-estimate-as-csv.spec.ts, and validated using custom logic from csv-utils.ts.
+Make sure the expected cost value is aligned with the test data when asserting CSV content.
