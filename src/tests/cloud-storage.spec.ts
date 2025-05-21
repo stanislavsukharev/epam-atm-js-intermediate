@@ -43,7 +43,7 @@ test.describe('Cloud Storage', () => {
       dataRetrieved: '',
       dataTransferred: '',
     })
-    await cloudStoragePage.selectRegions('Europe', 'Oceania')
+    await cloudStoragePage.selectRegions('Europe', 'Oceania');
     await expect(cloudStoragePage.totalCost).toHaveText(
       calculatorTestData.cloudStorage.minValuesEstimate,
     )
