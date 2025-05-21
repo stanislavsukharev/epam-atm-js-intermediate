@@ -86,4 +86,15 @@ export class CloudSqlPage extends BasePage {
     await this.page.getByRole('link', { name: 'Open estimate summary' }).click()
     await expect(this.page.getByText(expectedCost).first()).toBeVisible()
   }
+
+  async assertFullPageScreenshot(filename: string) {
+    await expect(this.page).toHaveScreenshot(filename, {
+      fullPage: true,
+      maxDiffPixelRatio: 0.03,
+    })
+  }
+
+  getInstanceTypeDropdown(): Locator {
+    return this.page.getByRole('combobox', { name: 'Instance type' })
+  }
 }

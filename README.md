@@ -20,8 +20,7 @@ It follows the Page Object Model (POM) design pattern to ensure modularity and m
 │   ├── cloud-storage.spec.ts  
 │   ├── compute-engine.spec.ts  
 |   └── export-estimate-as-csv.spec.ts 
-├── utils
-|   └── csv-utils.ts
+|   └── visual.spec.ts
 ```
 ## 📁 Project Structure & Naming Conventions
 
@@ -75,6 +74,11 @@ Naming follows the pattern:
 - Run tests in all browsers:
 
 `npm run test:playwright:all`
+
+## **Visual Testing**
+- Run all visual regression tests:
+
+`npx playwright test tests/visual.spec.ts`
 
 ## Reporting
 
