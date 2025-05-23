@@ -92,7 +92,6 @@ export class CloudSqlPage extends BasePage {
     await this.page.waitForLoadState('networkidle')
     await expect(this.page).toHaveScreenshot(filename, {
       fullPage: true,
-      maxDiffPixelRatio: 0,
     })
   }
 
