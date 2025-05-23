@@ -80,6 +80,10 @@ Naming follows the pattern:
 
 `npx playwright test tests/visual.spec.ts`
 
+- To update snapshots:
+
+`npx playwright test tests/visual.spec.ts --update-snapshots`
+
 ## Reporting
 
 This project is configured to generate the following reports:

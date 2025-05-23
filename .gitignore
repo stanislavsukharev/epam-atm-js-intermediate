@@ -7,7 +7,6 @@ test-results
 playwright-report
 results
 downloads
-visual.spec.ts-snapshots
 
 .env
 run

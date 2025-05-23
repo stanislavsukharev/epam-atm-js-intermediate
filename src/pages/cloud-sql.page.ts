@@ -88,9 +88,11 @@ export class CloudSqlPage extends BasePage {
   }
 
   async assertFullPageScreenshot(filename: string) {
+    await this.page.evaluate(() => window.scrollTo(0, 0))
+    await this.page.waitForLoadState('networkidle')
     await expect(this.page).toHaveScreenshot(filename, {
       fullPage: true,
-      maxDiffPixelRatio: 0.03,
+      maxDiffPixelRatio: 0,
     })
   }
 

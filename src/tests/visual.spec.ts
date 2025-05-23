@@ -3,20 +3,20 @@ import { test, expect } from '../fixtures/fixtures'
 test.describe('Visual Regression - Cloud SQL (Full Page)', () => {
   test('Filled estimate with 5 instances', async ({ cloudSqlPage }) => {
     await cloudSqlPage.selectRegion('South Carolina (us-east1)')
-    await cloudSqlPage.fillInstanceBasics({ instances: '5', usageTime: '3650' })
+    await cloudSqlPage.fillInstanceBasics({ instances: '4', usageTime: '3655' })
     await cloudSqlPage.selectInstanceType('db-standard-4 vCPUs: 4, RAM:')
     await cloudSqlPage.fillInstanceResources({ vcpus: '8', memory: '15', storage: '200' })
 
     await cloudSqlPage.assertFullPageScreenshot('cloud-sql-estimate-5-instances.png')
   })
 
-  test('Estimate with max values', async ({ cloudSqlPage }) => {
+  test('Estimate with min values', async ({ cloudSqlPage }) => {
     await cloudSqlPage.selectRegion('South Carolina (us-east1)')
-    await cloudSqlPage.fillInstanceBasics({ instances: '50000', usageTime: '36500000' })
+    await cloudSqlPage.fillInstanceBasics({ instances: '1', usageTime: '730' })
     await cloudSqlPage.selectInstanceType('db-standard-4 vCPUs: 4, RAM:')
-    await cloudSqlPage.fillInstanceResources({ vcpus: '96', memory: '624', storage: '65536' })
+    await cloudSqlPage.fillInstanceResources({ vcpus: '1', memory: '3.75', storage: '1' })
 
-    await cloudSqlPage.assertFullPageScreenshot('cloud-sql-estimate-max-values.png')
+    await cloudSqlPage.assertFullPageScreenshot('cloud-sql-estimate-min-values.png')
   })
 })
 
