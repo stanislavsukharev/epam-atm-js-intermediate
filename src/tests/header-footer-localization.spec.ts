@@ -1,4 +1,3 @@
-// src/tests/header-footer-localization.spec.ts
 import { test, expect } from '@playwright/test'
 import { HeaderFooterPage } from '../pages/header-footer-localization.page'
 import { languageExpectations } from '../test-data/language-expectations'
