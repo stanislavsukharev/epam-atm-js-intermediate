@@ -12,17 +12,20 @@ It follows the Page Object Model (POM) design pattern to ensure modularity and m
 │   ├── base.page.ts  
 │   ├── cloud-sql.page.ts  
 │   ├── cloud-storage.page.ts  
-│   └── compute-engine.page.ts  
+│   ├── compute-engine.page.ts
+    └── header-footer-localization.page.ts  
 ├── test-data  
-│   └── calculator.data.ts  
+│   ├── calculator.data.ts 
+    └── language-expectations.ts
 ├── tests  
 │   ├── cloud-sql.spec.ts  
 │   ├── cloud-storage.spec.ts  
 │   ├── compute-engine.spec.ts  
-|   └── export-estimate-as-csv.spec.ts 
-|   └── visual.spec.ts
+|   ├── export-estimate-as-csv.spec.ts 
+|   ├── visual.spec.ts
+|   └── header-footer-localization.spec.ts 
 ```
-## 📁 Project Structure & Naming Conventions
+## Project Structure & Naming Conventions
 
 This project follows the **Page Object Model** (POM) and organizes files clearly:
 
@@ -37,10 +40,13 @@ This project follows the **Page Object Model** (POM) and organizes files clearly
 | `cloud-sql.page.ts`            | Page object for Cloud SQL calculator section |
 | `cloud-storage.page.ts`        | Page object for Cloud Storage section        |
 | `compute-engine.page.ts`       | Page object for Compute Engine section       |
+| `header-footer.page.ts`        | Page object for Header/Footer localization |
 | `cloud-sql.spec.ts`            | End-to-end tests for Cloud SQL calculator    |
 | `cloud-storage.spec.ts`        | End-to-end tests for Cloud Storage           |
 | `compute-engine.spec.ts`       | End-to-end tests for Compute Engine          |
 | `export-estimate-as-csv.spec.ts`| Verifies download and validation of estimates as CSV |
+| `visual.spec.ts`                 | Visual regression tests                    |
+| `header-footer-localization.spec.ts` | Parameterized tests for Header/Footer localization|
 | `csv-utils.ts`                 | Validates downloaded CSV files               |
 | `calculator.data.ts`           | Test data used in calculator scenarios       |
 | `fixtures.ts`                  | Defines reusable fixtures for tests          |
@@ -49,7 +55,6 @@ Naming follows the pattern:
 `*.page.ts` — Page Object  
 `*.spec.ts` — Test Spec  
 `*.data.ts` — Test Data  
-`*.utils.ts` — Utility Module
 
 ## Setup and Installation
 
@@ -74,8 +79,7 @@ Naming follows the pattern:
 - Run tests in all browsers:
 
 `npm run test:playwright:all`
-
-## **Visual Testing**
+## Visual Testing
 - Run all visual regression tests:
 
 `npx playwright test tests/visual.spec.ts`
@@ -83,6 +87,20 @@ Naming follows the pattern:
 - To update snapshots:
 
 `npx playwright test tests/visual.spec.ts --update-snapshots`
+
+## Localization Testing: Header & Footer
+
+This new module verifies that the **Header** and **Footer** of the Google Cloud Calculator page are translated correctly into multiple languages. It uses a data-driven approach and Playwright’s URL-parameter (`?hl=<langCode>`) to switch languages.
+
+**What’s Tested**
+
+- On each supported language, the page is loaded with `?hl=<langCode>`.  
+- We collect all link texts in `<header>` and `<footer>` and verify that key phrases appear in the target language.  
+- Supported languages (by default):  
+  - `en` – English  
+  - `es` – Español  
+  - `ja` – 日本語  
+  - (Optional: add more BCP 47 codes as needed)
 
 ## Reporting
 
