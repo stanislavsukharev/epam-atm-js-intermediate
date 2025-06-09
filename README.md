@@ -4,26 +4,32 @@ It follows the Page Object Model (POM) design pattern to ensure modularity and m
 
 ## Project Structure
 
-```
-  src  
-├── fixtures  
-│   └── fixtures.ts  
-├── pages  
-│   ├── base.page.ts  
-│   ├── cloud-sql.page.ts  
-│   ├── cloud-storage.page.ts  
-│   ├── compute-engine.page.ts
-    └── header-footer-localization.page.ts  
-├── test-data  
-│   ├── calculator.data.ts 
-    └── language-expectations.ts
-├── tests  
-│   ├── cloud-sql.spec.ts  
-│   ├── cloud-storage.spec.ts  
-│   ├── compute-engine.spec.ts  
-|   ├── export-estimate-as-csv.spec.ts 
-|   ├── visual.spec.ts
-|   └── header-footer-localization.spec.ts 
+```src  
+    ├── components
+    │     ├── footer.component.ts
+    │     └── header.component.ts
+    │ 
+    ├── fixtures  
+    │     └── fixtures.ts  
+    │
+    ├── pages  
+    │     ├── base.page.ts  
+    │     ├── cloud-sql.page.ts  
+    │     ├── cloud-storage.page.ts  
+    │     ├── compute-engine.page.ts
+    │     └── header-footer-localization.page.ts
+    │  
+    ├── test-data  
+    │     ├── calculator.data.ts 
+    │     └── language-expectations.ts
+    │
+    ├── tests  
+    │     ├── cloud-sql.spec.ts  
+    │     ├── cloud-storage.spec.ts  
+    │     ├── compute-engine.spec.ts  
+    |     ├── export-estimate-as-csv.spec.ts 
+    |     ├── visual.spec.ts
+    |     └── header-footer-localization.spec.ts 
 ```
 ## Project Structure & Naming Conventions
 
@@ -54,53 +60,51 @@ This project follows the **Page Object Model** (POM) and organizes files clearly
 Naming follows the pattern:  
 `*.page.ts` — Page Object  
 `*.spec.ts` — Test Spec  
-`*.data.ts` — Test Data  
+`*.data.ts` — Test Data
+`*.component.ts` - UI component  
 
 ## Setup and Installation
 
 1. Clone the repository:
-
 `git clone https://git.epam.com/stanislav_sukharev/atm-js-intermediate.git`
 
 2. Navigate to project directory:
-
 `cd atm-js-intermediate`
 
 3. Install dependencies:
-
 `npm install`
 
 ## Running Tests
 
 - Run tests in Chromium only:
-
 `npm run test:playwright:chromium`
 
 - Run tests in all browsers:
-
 `npm run test:playwright:all`
-## Visual Testing
-- Run all visual regression tests:
 
+## Visual Testing
+
+- Run all visual regression tests:
 `npx playwright test tests/visual.spec.ts`
 
 - To update snapshots:
-
 `npx playwright test tests/visual.spec.ts --update-snapshots`
 
 ## Localization Testing: Header & Footer
 
-This new module verifies that the **Header** and **Footer** of the Google Cloud Calculator page are translated correctly into multiple languages. It uses a data-driven approach and Playwright’s URL-parameter (`?hl=<langCode>`) to switch languages.
-
-**What’s Tested**
-
-- On each supported language, the page is loaded with `?hl=<langCode>`.  
-- We collect all link texts in `<header>` and `<footer>` and verify that key phrases appear in the target language.  
 - Supported languages (by default):  
   - `en` – English  
   - `es` – Español  
-  - `ja` – 日本語  
-  - (Optional: add more BCP 47 codes as needed)
+
+  - to run:
+ `npx playwright test src/tests/header-footer-localization.spec.ts` 
+  
+
+- Optional languages:  
+  - `ja` – 日本語
+
+  - to run: 
+`TEST_LANGUAGES=ja npx playwright test src/tests/header-footer-localization.spec.ts`
 
 ## Reporting
 
@@ -121,12 +125,10 @@ The project uses **ESLint** for linting with the following configuration:
    - `eslint-plugin-prettier` for integrating Prettier with ESLint.
 
 2. **Scripts**:
-- To run ESLint:
-     
+- To run ESLint: 
 `npm run lint`
      
 - To automatically fix issues:
-    
 `npm run lint:fix`
 
 

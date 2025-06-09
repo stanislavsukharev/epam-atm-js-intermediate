@@ -1,4 +1,4 @@
-export const languageExpectations: Record<string, { header: string[]; footer: string[] }> = {
+export const languageExpectations: Record<string, Record<string, string[]>> = {
   en: {
     header: ['Pricing'],
     footer: ['Google Cloud terms'],
@@ -12,3 +12,6 @@ export const languageExpectations: Record<string, { header: string[]; footer: st
     footer: ['Google Cloud の用語'],
   },
 }
+
+export const defaultLanguages = ['en', 'es'] as const
+export type LanguageCode = keyof typeof languageExpectations

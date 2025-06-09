@@ -1,24 +1,35 @@
 import { test, expect } from '@playwright/test'
 import { HeaderFooterPage } from '../pages/header-footer-localization.page'
-import { languageExpectations } from '../test-data/language-expectations'
+import {
+  languageExpectations,
+  defaultLanguages,
+  LanguageCode,
+} from '../test-data/language-expectations.data'
 
-for (const langCode of Object.keys(languageExpectations)) {
-  test.describe(`Localization: Header/Footer in [${langCode}]`, () => {
-    test(`Should correctly display Header and Footer in [${langCode}]`, async ({ page }) => {
-      const hfPage = new HeaderFooterPage(page)
+const requested = process.env.TEST_LANGUAGES
+const languagesToTest = (
+  requested ? requested.split(',').map((l) => l.trim() as LanguageCode) : defaultLanguages
+).filter((lang) => lang in languageExpectations)
 
-      await hfPage.navigateToLanguage(langCode)
+for (const languageCode of languagesToTest) {
+  test.describe(`Localization: Header/Footer in [${languageCode}]`, () => {
+    test(`Should correctly display Header and Footer in [${languageCode}]`, async ({ page }) => {
+      const headerFooterPage = new HeaderFooterPage(page)
+      await headerFooterPage.navigateAndSwitchLanguage(languageCode)
 
-      const { header: expectedHeader, footer: expectedFooter } = languageExpectations[langCode]
+      const { header: expectedHeaderTexts, footer: expectedFooterTexts } =
+        languageExpectations[languageCode]
 
-      const headerTexts = await hfPage.getHeaderTexts()
-      const footerTexts = await hfPage.getFooterTexts()
+      for (const expectedText of expectedHeaderTexts) {
+        const linkLocator = headerFooterPage.header.getAllLinks().filter({ hasText: expectedText })
 
-      for (const expectedText of expectedHeader) {
-        expect(headerTexts.join(' ')).toContain(expectedText)
+        await expect(linkLocator).toHaveText([expectedText], { ignoreCase: true })
       }
-      for (const expectedText of expectedFooter) {
-        expect(footerTexts.join(' ')).toContain(expectedText)
+
+      for (const expectedText of expectedFooterTexts) {
+        const linkLocator = headerFooterPage.footer.getAllLinks().filter({ hasText: expectedText })
+
+        await expect(linkLocator).toHaveText([expectedText], { ignoreCase: true })
       }
     })
   })
