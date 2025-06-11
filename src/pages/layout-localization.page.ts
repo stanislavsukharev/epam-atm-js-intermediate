@@ -1,12 +1,7 @@
 import { Page } from '@playwright/test'
 import { BasePage } from './base.page'
-import { HeaderComponent } from '../components/header.component'
-import { FooterComponent } from '../components/footer.component'
 
-export class HeaderFooterPage extends BasePage {
-  readonly header: HeaderComponent
-  readonly footer: FooterComponent
-
+export class LayoutLocalizationPage extends BasePage {
   private languageMap: Record<string, string> = {
     en: 'English',
     es: 'Español',
@@ -14,27 +9,28 @@ export class HeaderFooterPage extends BasePage {
   }
 
   constructor(page: Page) {
-    super(page, '/products/calculator')
-    this.header = new HeaderComponent(page)
-    this.footer = new FooterComponent(page)
+    super(page, BasePage.CALCULATOR_URL)
   }
 
-  async navigateAndSwitchLanguage(langCode: string) {
-    const languageLabel = this.languageMap[langCode]
-    if (!languageLabel) throw new Error(`Unsupported language code: ${langCode}`)
-
+  async navigateToPage() {
     await this.page.goto(this.url, { waitUntil: 'networkidle' })
+  }
 
+  async dismissOverlays() {
     await this.page
       .getByRole('button', { name: 'No thanks' })
       .click({ timeout: 2000 })
       .catch(() => {})
 
     const dismissBtn = this.page.locator('div.message-container span.close svg')
-    if (await dismissBtn.isVisible().catch(() => false)) {
+    if (await dismissBtn.isVisible()) {
       await dismissBtn.click({ timeout: 2000 })
     }
+  }
 
+   async selectLanguage(langCode: string) {
+    const languageLabel = this.languageMap[langCode]
+    if (!languageLabel) throw new Error(`Unsupported language code: ${langCode}`)
     await this.page.locator('footer').scrollIntoViewIfNeeded()
 
     await this.page.getByRole('combobox').locator('div').click()

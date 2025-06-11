@@ -17,7 +17,7 @@ It follows the Page Object Model (POM) design pattern to ensure modularity and m
     │     ├── cloud-sql.page.ts  
     │     ├── cloud-storage.page.ts  
     │     ├── compute-engine.page.ts
-    │     └── header-footer-localization.page.ts
+    │     └── layout-localization.page.ts
     │  
     ├── test-data  
     │     ├── calculator.data.ts 
@@ -29,7 +29,7 @@ It follows the Page Object Model (POM) design pattern to ensure modularity and m
     │     ├── compute-engine.spec.ts  
     |     ├── export-estimate-as-csv.spec.ts 
     |     ├── visual.spec.ts
-    |     └── header-footer-localization.spec.ts 
+    |     └── layout-localization.spec.ts 
 ```
 ## Project Structure & Naming Conventions
 
@@ -42,17 +42,18 @@ This project follows the **Page Object Model** (POM) and organizes files clearly
 | `src/test-data/`               | Contains Playwright test data                |
 | `src/fixtures/`                | Custom Playwright fixtures                   |
 | `src/utils/`                   | Utility modules (e.g. CSV parsing)           |
+| `src/components/`              | UI components                                 |
 | `base.page.ts`                 | Base class for shared page object logic      |
 | `cloud-sql.page.ts`            | Page object for Cloud SQL calculator section |
 | `cloud-storage.page.ts`        | Page object for Cloud Storage section        |
 | `compute-engine.page.ts`       | Page object for Compute Engine section       |
-| `header-footer.page.ts`        | Page object for Header/Footer localization |
+| `layout-localization.page.ts`  | Page object for Header/Footer localization   |
 | `cloud-sql.spec.ts`            | End-to-end tests for Cloud SQL calculator    |
 | `cloud-storage.spec.ts`        | End-to-end tests for Cloud Storage           |
 | `compute-engine.spec.ts`       | End-to-end tests for Compute Engine          |
 | `export-estimate-as-csv.spec.ts`| Verifies download and validation of estimates as CSV |
-| `visual.spec.ts`                 | Visual regression tests                    |
-| `header-footer-localization.spec.ts` | Parameterized tests for Header/Footer localization|
+| `visual.spec.ts`               | Visual regression tests                    |
+| `layout-localization.spec.ts`  | Parameterized tests for Header/Footer localization|
 | `csv-utils.ts`                 | Validates downloaded CSV files               |
 | `calculator.data.ts`           | Test data used in calculator scenarios       |
 | `fixtures.ts`                  | Defines reusable fixtures for tests          |
@@ -97,14 +98,14 @@ Naming follows the pattern:
   - `es` – Español  
 
   - to run:
- `npx playwright test src/tests/header-footer-localization.spec.ts` 
+ `npx playwright test src/tests/layout-localization.spec.ts` 
   
 
 - Optional languages:  
   - `ja` – 日本語
 
   - to run: 
-`TEST_LANGUAGES=ja npx playwright test src/tests/header-footer-localization.spec.ts`
+`TEST_LANGUAGES=ja npx playwright test src/tests/layout-localization.spec.ts`
 
 ## Reporting
 

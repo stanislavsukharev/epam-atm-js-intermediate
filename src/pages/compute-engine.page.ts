@@ -13,7 +13,7 @@ export class CalculatorPage extends BasePage {
   readonly searchInput: Locator
 
   constructor(page: Page) {
-    super(page, '/products/calculator')
+    super(page, BasePage.CALCULATOR_URL)
 
     const label = process.env['LOCALE'] === 'en' ? 'OK, got it' : 'OK'
 

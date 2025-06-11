@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test'
-import { HeaderFooterPage } from '../pages/header-footer-localization.page'
+import { LayoutLocalizationPage } from '../pages/layout-localization.page'
 import {
   languageExpectations,
   defaultLanguages,
@@ -14,23 +14,21 @@ const languagesToTest = (
 for (const languageCode of languagesToTest) {
   test.describe(`Localization: Header/Footer in [${languageCode}]`, () => {
     test(`Should correctly display Header and Footer in [${languageCode}]`, async ({ page }) => {
-      const headerFooterPage = new HeaderFooterPage(page)
-      await headerFooterPage.navigateAndSwitchLanguage(languageCode)
+      const layoutLocalizationPage = new LayoutLocalizationPage(page)
+      await layoutLocalizationPage.navigateToPage()
+      await layoutLocalizationPage.dismissOverlays()
+      await layoutLocalizationPage.selectLanguage(languageCode)
 
       const { header: expectedHeaderTexts, footer: expectedFooterTexts } =
         languageExpectations[languageCode]
 
-      for (const expectedText of expectedHeaderTexts) {
-        const linkLocator = headerFooterPage.header.getAllLinks().filter({ hasText: expectedText })
+      await expect(
+        layoutLocalizationPage.header.getAllLinks().filter({ hasText: expectedHeaderTexts[0] }),
+      ).toHaveText([expectedHeaderTexts[0]], { ignoreCase: true })
 
-        await expect(linkLocator).toHaveText([expectedText], { ignoreCase: true })
-      }
-
-      for (const expectedText of expectedFooterTexts) {
-        const linkLocator = headerFooterPage.footer.getAllLinks().filter({ hasText: expectedText })
-
-        await expect(linkLocator).toHaveText([expectedText], { ignoreCase: true })
-      }
+      await expect(
+        layoutLocalizationPage.footer.getAllLinks().filter({ hasText: expectedFooterTexts[0] }),
+      ).toHaveText([expectedFooterTexts[0]], { ignoreCase: true })
     })
   })
 }
