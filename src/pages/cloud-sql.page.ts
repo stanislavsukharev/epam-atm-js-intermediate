@@ -18,7 +18,7 @@ export class CloudSqlPage extends BasePage {
   readonly outOfRangeMessage: Locator
 
   constructor(page: Page) {
-    super(page, '/products/calculator')
+    super(page, BasePage.CALCULATOR_URL)
 
     this.addEstimateButton = page.getByRole('button', { name: 'Add to estimate' }).first()
     this.cloudSqlCard = page.getByRole('button', { name: 'Cloud SQL Google Cloud SQL is' })

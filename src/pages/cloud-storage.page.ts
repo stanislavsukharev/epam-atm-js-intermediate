@@ -14,7 +14,7 @@ export class CloudStoragePage extends BasePage {
   readonly downloadButton: Locator
 
   constructor(page: Page) {
-    super(page, '/products/calculator')
+    super(page, BasePage.CALCULATOR_URL)
 
     this.addEstimateButton = page.getByRole('button', { name: 'Add to estimate' }).first()
     this.cloudStorageCard = page.getByRole('button', { name: 'Cloud Storage Cloud Storage' })

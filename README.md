@@ -4,25 +4,34 @@ It follows the Page Object Model (POM) design pattern to ensure modularity and m
 
 ## Project Structure
 
+```src  
+    ├── components
+    │     ├── footer.component.ts
+    │     └── header.component.ts
+    │ 
+    ├── fixtures  
+    │     └── fixtures.ts  
+    │
+    ├── pages  
+    │     ├── base.page.ts  
+    │     ├── cloud-sql.page.ts  
+    │     ├── cloud-storage.page.ts  
+    │     ├── compute-engine.page.ts
+    │     └── layout-localization.page.ts
+    │  
+    ├── test-data  
+    │     ├── calculator.data.ts 
+    │     └── language-expectations.ts
+    │
+    ├── tests  
+    │     ├── cloud-sql.spec.ts  
+    │     ├── cloud-storage.spec.ts  
+    │     ├── compute-engine.spec.ts  
+    |     ├── export-estimate-as-csv.spec.ts 
+    |     ├── visual.spec.ts
+    |     └── layout-localization.spec.ts 
 ```
-  src  
-├── fixtures  
-│   └── fixtures.ts  
-├── pages  
-│   ├── base.page.ts  
-│   ├── cloud-sql.page.ts  
-│   ├── cloud-storage.page.ts  
-│   └── compute-engine.page.ts  
-├── test-data  
-│   └── calculator.data.ts  
-├── tests  
-│   ├── cloud-sql.spec.ts  
-│   ├── cloud-storage.spec.ts  
-│   ├── compute-engine.spec.ts  
-|   └── export-estimate-as-csv.spec.ts 
-|   └── visual.spec.ts
-```
-## 📁 Project Structure & Naming Conventions
+## Project Structure & Naming Conventions
 
 This project follows the **Page Object Model** (POM) and organizes files clearly:
 
@@ -33,14 +42,18 @@ This project follows the **Page Object Model** (POM) and organizes files clearly
 | `src/test-data/`               | Contains Playwright test data                |
 | `src/fixtures/`                | Custom Playwright fixtures                   |
 | `src/utils/`                   | Utility modules (e.g. CSV parsing)           |
+| `src/components/`              | UI components                                 |
 | `base.page.ts`                 | Base class for shared page object logic      |
 | `cloud-sql.page.ts`            | Page object for Cloud SQL calculator section |
 | `cloud-storage.page.ts`        | Page object for Cloud Storage section        |
 | `compute-engine.page.ts`       | Page object for Compute Engine section       |
+| `layout-localization.page.ts`  | Page object for Header/Footer localization   |
 | `cloud-sql.spec.ts`            | End-to-end tests for Cloud SQL calculator    |
 | `cloud-storage.spec.ts`        | End-to-end tests for Cloud Storage           |
 | `compute-engine.spec.ts`       | End-to-end tests for Compute Engine          |
 | `export-estimate-as-csv.spec.ts`| Verifies download and validation of estimates as CSV |
+| `visual.spec.ts`               | Visual regression tests                    |
+| `layout-localization.spec.ts`  | Parameterized tests for Header/Footer localization|
 | `csv-utils.ts`                 | Validates downloaded CSV files               |
 | `calculator.data.ts`           | Test data used in calculator scenarios       |
 | `fixtures.ts`                  | Defines reusable fixtures for tests          |
@@ -48,41 +61,51 @@ This project follows the **Page Object Model** (POM) and organizes files clearly
 Naming follows the pattern:  
 `*.page.ts` — Page Object  
 `*.spec.ts` — Test Spec  
-`*.data.ts` — Test Data  
-`*.utils.ts` — Utility Module
+`*.data.ts` — Test Data
+`*.component.ts` - UI component  
 
 ## Setup and Installation
 
 1. Clone the repository:
-
 `git clone https://git.epam.com/stanislav_sukharev/atm-js-intermediate.git`
 
 2. Navigate to project directory:
-
 `cd atm-js-intermediate`
 
 3. Install dependencies:
-
 `npm install`
 
 ## Running Tests
 
 - Run tests in Chromium only:
-
 `npm run test:playwright:chromium`
 
 - Run tests in all browsers:
-
 `npm run test:playwright:all`
 
-## **Visual Testing**
-- Run all visual regression tests:
+## Visual Testing
 
+- Run all visual regression tests:
 `npx playwright test tests/visual.spec.ts`
 
 - To update snapshots:
-
 `npx playwright test tests/visual.spec.ts --update-snapshots`
+
+## Localization Testing: Header & Footer
+
+- Supported languages (by default):  
+  - `en` – English  
+  - `es` – Español  
+
+  - to run:
+ `npx playwright test src/tests/layout-localization.spec.ts` 
+  
+
+- Optional languages:  
+  - `ja` – 日本語
+
+  - to run: 
+`TEST_LANGUAGES=ja npx playwright test src/tests/layout-localization.spec.ts`
 
 ## Reporting
 
@@ -103,12 +126,10 @@ The project uses **ESLint** for linting with the following configuration:
    - `eslint-plugin-prettier` for integrating Prettier with ESLint.
 
 2. **Scripts**:
-- To run ESLint:
-     
+- To run ESLint: 
 `npm run lint`
      
 - To automatically fix issues:
-    
 `npm run lint:fix`
 
 
