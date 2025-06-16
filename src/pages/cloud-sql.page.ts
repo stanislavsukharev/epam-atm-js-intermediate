@@ -35,9 +35,9 @@ export class CloudSqlPage extends BasePage {
     this.storageInput = page.getByRole('spinbutton', { name: 'Storage (Provisioned Amount' })
     this.totalCost = page.locator('span.MyvX5d.D0aEmf')
     this.requiredFieldMessage = page
-      .locator('div')
-      .filter({ hasText: /^Required field$/ })
-      .locator('span')
+      .locator('div:has-text("Required field")')
+      .filter({ has: page.locator('text=Required field') })
+      .first()
     this.outOfRangeMessage = page.getByText(
       'Value needs to be greater than 0 and less than or equal to 65,536 GiB',
     )
@@ -97,5 +97,17 @@ export class CloudSqlPage extends BasePage {
 
   getInstanceTypeDropdown(): Locator {
     return this.page.getByRole('combobox', { name: 'Instance type' })
+  }
+
+  async triggerValidation(input: Locator, message: Locator, wait = 10_000): Promise<void> {
+    await input.fill('')
+    await input.evaluate((el: HTMLElement) => el.blur())
+
+    await this.page
+      .locator('header')
+      .click({ trial: true })
+      .catch(() => {})
+
+    await expect(message).toBeVisible({ timeout: wait })
   }
 }

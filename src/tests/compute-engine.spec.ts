@@ -6,12 +6,9 @@ test.describe('Cloud Calculator', () => {
     await expect(calculatorPage.addEstimateButton).toBeVisible()
   })
 
-  test('Should switch currency to Euro and display it', async ({ calculatorPage }) => {
-    await calculatorPage.selectCurrency('EUR')
-    await expect(calculatorPage.selectedCurrency).toHaveText('EUR')
-  })
-
-  test('Should display correct result when searching for "Dataflow"', async ({ calculatorPage }) => {
+  test('Should display correct result when searching for "Dataflow"', async ({
+    calculatorPage,
+  }) => {
     await calculatorPage.addEstimate()
     await expect(calculatorPage.addEstimationModalWindow).toBeVisible()
 

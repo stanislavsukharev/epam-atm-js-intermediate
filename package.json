@@ -7,7 +7,9 @@
     "test:playwright:chromium": "npx playwright test --project=chromium",
     "test:playwright:all": "npx playwright test",
     "lint": "eslint . --ext .js,.ts,.jsx,.tsx",
-    "lint:fix": "eslint . --ext .js,.ts,.jsx,.tsx --fix"
+    "lint:fix": "eslint . --ext .js,.ts,.jsx,.tsx --fix",
+    "test:e2e:core": "npx playwright test tests/cloud-sql.spec.ts tests/cloud-storage.spec.ts tests/compute-engine.spec.ts",
+    "test:e2e:mobile": "playwright test tests/{cloud-sql,cloud-storage,compute-engine}.spec.ts --project=\"iPhone 15 Pro\" --project=\"iPad Pro 11\""
   },
   "license": "EPAM Systems",
   "engines": {
