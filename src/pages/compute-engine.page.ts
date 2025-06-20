@@ -2,7 +2,6 @@ import { BasePage } from './base.page'
 import { Locator, Page } from '@playwright/test'
 
 export class CalculatorPage extends BasePage {
-  readonly okCookieButton: Locator
   readonly addEstimateButton: Locator
   readonly addEstimationModalWindow: Locator
   readonly configurationBlock: Locator
@@ -13,9 +12,6 @@ export class CalculatorPage extends BasePage {
 
   constructor(page: Page) {
     super(page, BasePage.CALCULATOR_URL)
-
-    const label = process.env.LOCALE === 'en' ? 'OK, got it' : 'OK'
-    this.okCookieButton = page.getByText(label, { exact: true })
 
     this.addEstimateButton = page.getByRole('button', { name: 'Add to estimate' }).first()
     this.addEstimationModalWindow = page.getByRole('dialog', { name: /add to this estimate/i })
@@ -30,23 +26,16 @@ export class CalculatorPage extends BasePage {
     this.searchInput = page.getByPlaceholder('Search by product name')
   }
 
-  async acceptCookies(): Promise<void> {
-    if (await this.okCookieButton.isVisible()) {
-      await this.okCookieButton.click()
-    }
-  }
-
   async addEstimate(): Promise<void> {
-    await this.addEstimateButton.waitFor({ state: 'visible', timeout: 15_000 })
+    await this.addEstimateButton.waitFor({ state: 'visible', timeout: 15000 })
     await this.addEstimateButton.click()
-    await this.addEstimationModalWindow.waitFor({ state: 'visible', timeout: 15_000 })
+    await this.addEstimationModalWindow.waitFor({ state: 'visible', timeout: 15000 })
   }
 
   async openComputeEngine(): Promise<void> {
     const card = this.page.getByRole('button', { name: /compute engine/i }).first()
-    await card.waitFor({ state: 'visible', timeout: 15_000 })
-    await card.click()
-    await this.configurationBlock.waitFor({ state: 'visible', timeout: 15_000 })
+    await card.click({ timeout: 15000 })
+    await this.configurationBlock.waitFor({ state: 'visible', timeout: 15000 })
   }
 
   async incrementInstances(times: number): Promise<void> {

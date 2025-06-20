@@ -17,7 +17,7 @@ export abstract class BasePage {
   async open(): Promise<void> {
     await this.page.goto(this.url, { waitUntil: 'load' });
     const agree = this.page.getByRole('button', { name: 'Agree' });
-    if (await agree.isVisible({ timeout: 3_000 })) {
+    if (await agree.isVisible({ timeout: 3000 })) {
       await agree.click();
     }
   }

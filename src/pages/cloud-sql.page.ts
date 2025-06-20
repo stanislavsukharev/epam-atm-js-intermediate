@@ -99,15 +99,14 @@ export class CloudSqlPage extends BasePage {
     return this.page.getByRole('combobox', { name: 'Instance type' })
   }
 
-  async triggerValidation(input: Locator, message: Locator, wait = 10_000): Promise<void> {
+  async triggerValidation(input: Locator, message: Locator): Promise<void> {
     await input.fill('')
-    await input.evaluate((el: HTMLElement) => el.blur())
 
     await this.page
       .locator('header')
-      .click({ trial: true })
+      .click()
       .catch(() => {})
 
-    await expect(message).toBeVisible({ timeout: wait })
+    await message.waitFor({ state: 'visible', timeout: 10000 })
   }
 }

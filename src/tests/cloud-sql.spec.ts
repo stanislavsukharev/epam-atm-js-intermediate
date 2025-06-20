@@ -33,6 +33,7 @@ test.describe('Cloud SQL', () => {
       cloudSqlPage.instancesInput,
       cloudSqlPage.requiredFieldMessage,
     )
+    await expect(cloudSqlPage.requiredFieldMessage).toBeVisible()
   })
 
   test('Usage time field strips invalid characters', async ({ cloudSqlPage }) => {
