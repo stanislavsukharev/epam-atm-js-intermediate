@@ -27,7 +27,6 @@ export const test = base.extend<MyFixtures>({
   calculatorPage: async ({ page }, use) => {
     const calculatorPage = new CalculatorPage(page)
     await calculatorPage.open()
-    await calculatorPage.acceptCookies()
     await use(calculatorPage)
   },
 })

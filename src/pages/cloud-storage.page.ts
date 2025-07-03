@@ -120,3 +120,4 @@ export class CloudStoragePage extends BasePage {
     await this.page.waitForTimeout(timeout)
   }
 }
+

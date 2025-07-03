@@ -26,8 +26,13 @@ test.describe('Cloud SQL', () => {
     await cloudSqlPage.assertEstimate(calculatorTestData.cloudSql.minValuesEstimate)
   })
 
-  test('Shows required field message when number of instances is empty', async ({ cloudSqlPage }) => {
-    await cloudSqlPage.instancesInput.fill('')
+  test('Shows required field message when number of instances is empty', async ({
+    cloudSqlPage,
+  }) => {
+    await cloudSqlPage.triggerValidation(
+      cloudSqlPage.instancesInput,
+      cloudSqlPage.requiredFieldMessage,
+    )
     await expect(cloudSqlPage.requiredFieldMessage).toBeVisible()
   })
 

@@ -83,6 +83,25 @@ Naming follows the pattern:
 - Run tests in all browsers:
 `npm run test:playwright:all`
 
+## Running mobile E2E tests
+
+The Playwright configuration already contains two mobile projects based on
+device emulation:
+
+| Project name (in `playwright.config.ts`) | Emulator |
+| ---------------------------------------- | -------- |
+| `iPhone 15 Pro`                          | iOS 17 – iPhone 15 Pro (430 × 932) |
+| `iPad Pro 11`                            | iPad Pro 11-inch (830 × 1194) |
+
+ - e2e mobile tests location:
+
+tests/cloud-sql.spec.ts
+tests/cloud-storage.spec.ts
+tests/compute-engine.spec.ts
+
+- Run mobile tests
+`npm run test:e2e:mobile`
+
 ## Visual Testing
 
 - Run all visual regression tests:

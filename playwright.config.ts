@@ -1,4 +1,4 @@
-import { defineConfig, devices } from '@playwright/test'
+import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './src/tests',
@@ -15,8 +15,9 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
 
   reporter: [
-    ['html', { outputFolder: 'playwright-report', open: 'never' }],
-    ['junit', { outputFile: 'results/junit-results.xml' }],
+    ['list'],
+    ['html',   { outputFolder: 'playwright-report', open: 'never' }],
+    ['junit',  { outputFile: 'results/junit-results.xml' }],
     /* [
       '@reportportal/agent-js-playwright',
       {
@@ -37,20 +38,37 @@ export default defineConfig({
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
+    actionTimeout: 10_000,
+    navigationTimeout: 60_000,
+    launchOptions: { args: ['--disable-blink-features=CSSAnimations'] },
   },
 
   projects: [
+    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+    { name: 'firefox',  use: { ...devices['Desktop Firefox'] } },
+    { name: 'webkit',   use: { ...devices['Desktop Safari'] } },
+
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: 'iPhone 15 Pro',
+      use: {
+        ...devices['iPhone 15 Pro'],
+        isMobile: false,
+        hasTouch: false,
+        locale: 'en-US',
+        timezoneId: 'America/Los_Angeles',
+        colorScheme: 'light',
+      },
     },
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      name: 'iPad Pro 11',
+      use: {
+        ...devices['iPad Pro 11'],
+        isMobile: false,
+        hasTouch: false,
+        locale: 'en-US',
+        timezoneId: 'America/Los_Angeles',
+        colorScheme: 'light',
+      },
     },
   ],
-})
+});
