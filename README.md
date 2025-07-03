@@ -67,7 +67,7 @@ Naming follows the pattern:
 ## Setup and Installation
 
 1. Clone the repository:
-`git clone https://git.epam.com/stanislav_sukharev/atm-js-intermediate.git`
+`git clone https://github.com/stanislavsukharev/epam-atm-js-intermediate`
 
 2. Navigate to project directory:
 `cd atm-js-intermediate`
